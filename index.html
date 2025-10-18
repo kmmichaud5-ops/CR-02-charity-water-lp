@@ -4,44 +4,323 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charity Water Landing Page</title>
+    <!-- Link to the CSS file -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Use Google Fonts as a fallback for Proxima Nova and Avenir -->
+    <link href="https://fonts.googleapis.com/css?family=Avenir:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        /* Beginner-friendly CSS for colors and fonts */
+
+        /* Set a subtle silverish blue gradient for the whole page */
+        body {
+            background: linear-gradient(135deg, #e3eaf2 0%, #b6d0e2 60%, #eaf6fb 100%);
+            font-family: 'Proxima Nova', 'Avenir', 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        /* Add a container with black borders on the sides */
+        .page-container {
+            max-width: 950px;           /* Slightly wider for a modern look */
+            margin: 40px auto 40px auto; /* Add top and bottom margin */
+            border-left: 5px solid #000; /* Black border on the left */
+            border-right: 5px solid #000; /* Black border on the right */
+            background: #fff;
+            box-shadow: 0 8px 32px rgba(46,157,247,0.08);
+            border-radius: 12px;
+        }
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-bottom: 2px solid #FFC907;
+            padding: 18px 32px 18px 32px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .navbar .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2E9DF7;
+            letter-spacing: 1px;
+        }
+        .navbar nav a {
+            color: #222;
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 1.08em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar nav a:hover {
+            color: #2E9DF7;
+        }
+
+        /* Headline and subheadline styles */
+        .main-headline-section {
+            background: linear-gradient(90deg, #FFC907 60%, #eaf6fb 100%);
+            padding: 40px 10px 30px 10px;
+            text-align: center;
+            border-bottom: 2px solid #e3eaf2;
+        }
+        .main-headline-section h1 {
+            /* Faint underline for classier look */
+            border-bottom: 2px solid rgba(0,0,0,0.10);
+            display: inline-block;
+            padding-bottom: 6px;
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 2px 0 #000,
+                2px 0 0 #000,
+                0 -2px 0 #000,
+                -2px 0 0 #000;
+        }
+        .main-headline-section p {
+            color: #222;
+            font-size: 1.22em;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Hero section styles */
+        .hero {
+            background: linear-gradient(90deg, #2E9DF7 80%, #FFC907 100%);
+            color: #fff;
+            text-align: left;
+            padding: 48px 48px 40px 48px;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(46,157,247,0.07);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80') center center/cover no-repeat;
+            opacity: 0.18;
+            z-index: 0;
+        }
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            border-bottom: 2px solid rgba(255,255,255,0.25);
+            display: inline-block;
+            padding-bottom: 5px;
+            font-size: 2.3em;
+            margin-bottom: 14px;
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 1.18em;
+            max-width: 500px;
+        }
+
+        /* Story section styles */
+        .story {
+            background-color: #8BD1CB; /* Light Blue */
+            color: #222;
+            text-align: left;
+            padding: 36px 48px 28px 48px;
+            border-radius: 12px;
+            margin: 32px 0 24px 0;
+            box-shadow: 0 2px 12px rgba(139,209,203,0.08);
+        }
+        .story h2 {
+            border-bottom: 2px solid rgba(21,154,72,0.18);
+            display: inline-block;
+            padding-bottom: 5px;
+            color: #159A48; /* Dark Green */
+            margin-bottom: 14px;
+            font-size: 2em;
+        }
+
+        /* Impact story section styles */
+        .impact-story {
+            background-color: #fff;
+            color: #222;
+            text-align: left;
+            padding: 36px 48px 28px 48px;
+            border-radius: 12px;
+            margin: 32px 0 24px 0;
+            box-shadow: 0 2px 12px rgba(255,144,42,0.07);
+        }
+        .impact-story h2 {
+            border-bottom: 2px solid rgba(255,144,42,0.18);
+            display: inline-block;
+            padding-bottom: 5px;
+            color: #FF902A; /* Orange */
+            margin-bottom: 18px;
+            font-size: 2em;
+        }
+        .impact-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 32px;
+        }
+        .impact-image {
+            width: 220px;
+            border-radius: 10px;
+            margin-bottom: 0;
+            border: 3px solid #FFC907; /* Yellow border */
+            box-shadow: 0 2px 8px rgba(46,157,247,0.08);
+        }
+        .impact-content p {
+            max-width: 400px;
+            font-size: 1.13em;
+        }
+
+        /* Call-to-action section styles */
+        .call-to-action {
+            background: linear-gradient(90deg, #8BD1CB 80%, #2E9DF7 100%);
+            color: #222;
+            text-align: center;
+            padding: 48px 10px 44px 10px;
+            border-radius: 0 0 12px 12px;
+            margin-top: 36px;
+            box-shadow: 0 2px 12px rgba(139,209,203,0.08);
+        }
+        .call-to-action h2 {
+            border-bottom: 2px solid rgba(46,157,247,0.18);
+            display: inline-block;
+            padding-bottom: 5px;
+            color: #2E9DF7; /* Blue */
+            margin-bottom: 18px;
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .call-to-action p {
+            font-size: 1.22em;
+            margin-bottom: 28px;
+            font-weight: 500;
+            color: #222;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .donate-button {
+            background-color: #4FCB53; /* Green */
+            color: #fff;
+            padding: 22px 60px;
+            border: none;
+            border-radius: 7px;
+            font-size: 1.45em;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            letter-spacing: 1px;
+        }
+        .donate-button:hover {
+            background-color: #159A48; /* Dark Green */
+            transform: scale(1.04);
+        }
+
+        /* Make sure the page is responsive on small screens */
+        @media (max-width: 950px) {
+            .page-container {
+                max-width: 99vw;
+                border-left: 2px solid #000;
+                border-right: 2px solid #000;
+                border-radius: 0;
+            }
+            .hero, .story, .impact-story {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+        @media (max-width: 600px) {
+            .page-container {
+                border-left: 1px solid #000;
+                border-right: 1px solid #000;
+                padding: 0;
+                border-radius: 0;
+            }
+            .hero, .story, .impact-story {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+            .navbar {
+                flex-direction: column;
+                padding: 12px 8px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+    <!-- Page container with black borders on the sides -->
+    <div class="page-container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <span class="logo">charity: water</span>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#impact">Impact</a>
+                <a href="#donate">Donate</a>
+            </nav>
+        </div>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
-
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
+        <!-- Headline and Subheadline Section: Top of the page -->
+        <div class="main-headline-section">
+            <h1>Real People. Real Change. Real Impact.</h1>
             <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
+                charity: water turns your passion for change into real, trackable impact– proof that one person can change the world.
             </p>
         </div>
-    </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+        <!-- Hero Section: Main banner -->
+        <section class="hero">
+            <h1>Clean Water for Everyone</h1>
+            <p>Join us in bringing safe, clean water to communities in need.</p>
+        </section>
+
+        <!-- Story Section: About the nonprofit -->
+        <section class="story">
+            <h2>Our Story</h2>
+            <p>
+                charity: water is a nonprofit organization bringing clean and safe drinking water to people in developing countries. We believe in a world where everyone has access to clean water.
+            </p>
+        </section>
+
+        <!-- Real-World Impact Story Section -->
+        <section class="impact-story" id="impact">
+            <h2>Real Impact: Meet Amina</h2>
+            <div class="impact-content">
+                <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80" alt="A child in need being given water, charity: water" class="impact-image">
+                <p>
+                    Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
+                </p>
+            </div>
+        </section>
+
+        <!-- Call-to-Action Section: Encourage visitors to take action -->
+        <section class="call-to-action" id="donate">
+            <h2>Make a Difference</h2>
+            <p>
+                <b>Your support brings hope and health to communities in need.</b><br>
+                Every donation helps provide clean, safe water—and proof that one person can change the world.
+            </p>
+            <a href="#" class="donate-button">Donate Now</a>
+        </section>
+    </div>
 </body>
 </html>
