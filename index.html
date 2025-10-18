@@ -59,6 +59,36 @@
             color: #2E9DF7;
         }
 
+        /* Top image styles */
+        .top-image {
+            width: 100%;
+            height: 360px; /* taller for stronger visual impact */
+            overflow: hidden;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            position: relative;
+        }
+        .top-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.02) contrast(0.98);
+        }
+        .top-image::after {
+            /* subtle dark overlay to improve contrast */
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+            pointer-events: none;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
         /* Headline and subheadline styles */
         .main-headline-section {
             background: linear-gradient(90deg, #FFC907 60%, #eaf6fb 100%);
@@ -177,62 +207,107 @@
             gap: 32px;
         }
         .impact-image {
-            width: 220px;
+            width: 300px; /* a bit larger */
+            max-width: 40%;
             border-radius: 10px;
             margin-bottom: 0;
             border: 3px solid #FFC907; /* Yellow border */
             box-shadow: 0 2px 8px rgba(46,157,247,0.08);
         }
         .impact-content p {
-            max-width: 400px;
-            font-size: 1.13em;
+            max-width: 520px;
+            font-size: 1.2em;
+            line-height: 1.5;
         }
 
-        /* Call-to-action section styles */
+        /* Site logo when placed inside the top-image (small, inset) */
+        .top-image .site-logo {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 36px; /* smaller */
+            height: auto;
+            z-index: 3; /* above the image overlay */
+            background: rgba(255,255,255,0.9);
+            padding: 4px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .top-image .site-logo {
+                width: 30px;
+                top: 8px;
+                left: 8px;
+                padding: 3px;
+            }
+        }
+
+        /* Call-to-action section styles (with background image + overlay for contrast) */
         .call-to-action {
-            background: linear-gradient(90deg, #8BD1CB 80%, #2E9DF7 100%);
-            color: #222;
+            position: relative;
+            color: #fff;
             text-align: center;
-            padding: 48px 10px 44px 10px;
+            padding: 56px 20px 56px 20px;
             border-radius: 0 0 12px 12px;
             margin-top: 36px;
-            box-shadow: 0 2px 12px rgba(139,209,203,0.08);
+            overflow: hidden;
+        }
+        .call-to-action::before {
+            /* background image placed behind content */
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('assets/Madagascar_2019_CG-2679.jpg') center/cover no-repeat;
+            z-index: 0;
+            filter: contrast(0.98) saturate(1.02);
+        }
+        .call-to-action > * {
+            position: relative; /* bring content above overlay */
+            z-index: 1;
         }
         .call-to-action h2 {
-            border-bottom: 2px solid rgba(46,157,247,0.18);
+            border-bottom: 2px solid rgba(255,255,255,0.18);
             display: inline-block;
-            padding-bottom: 5px;
-            color: #2E9DF7; /* Blue */
+            padding-bottom: 6px;
+            color: #fff;
             margin-bottom: 18px;
             font-size: 2.2em;
             font-weight: bold;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.45);
         }
         .call-to-action p {
-            font-size: 1.22em;
+            font-size: 1.18em;
             margin-bottom: 28px;
             font-weight: 500;
-            color: #222;
-            max-width: 650px;
+            color: #fff;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.35);
         }
         .donate-button {
-            background-color: #4FCB53; /* Green */
-            color: #fff;
-            padding: 22px 60px;
+            background-color: #FFC907; /* Yellow */
+            color: #111; /* dark text for contrast */
+            padding: 18px 56px;
             border: none;
             border-radius: 7px;
-            font-size: 1.45em;
+            font-size: 1.25em;
             font-weight: bold;
             text-decoration: none;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transition: background 0.18s, transform 0.18s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.18);
             letter-spacing: 1px;
+            z-index: 2; /* keep above overlay */
         }
         .donate-button:hover {
-            background-color: #159A48; /* Dark Green */
-            transform: scale(1.04);
+            background-color: #e6b500; /* slightly darker yellow */
+            transform: translateY(-3px);
+        }
+        .donate-button:focus {
+            outline: 3px solid rgba(255,201,7,0.22);
+            outline-offset: 4px;
         }
 
         /* Make sure the page is responsive on small screens */
@@ -246,6 +321,9 @@
             .hero, .story, .impact-story {
                 padding-left: 18px;
                 padding-right: 18px;
+            }
+            .top-image {
+                height: 260px;
             }
         }
         @media (max-width: 600px) {
@@ -263,12 +341,22 @@
                 flex-direction: column;
                 padding: 12px 8px;
             }
+            .top-image {
+                height: 180px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Page container with black borders on the sides -->
     <div class="page-container">
+        <!-- Top image (local) -->
+        <div class="top-image">
+            <img src="assets/Ambote-CharityWater-09667.jpg" alt="People receiving water from charity: water" />
+            <!-- Small site logo inset in the top-left of the image -->
+            <img src="assets/jerry_can_yellow.png" alt="charity: water logo" class="site-logo" />
+        </div>
+
         <!-- Navigation Bar -->
         <div class="navbar">
             <span class="logo">charity: water</span>
@@ -301,13 +389,13 @@
             </p>
         </section>
 
-        <!-- Real-World Impact Story Section -->
+        <!-- Your Impact Section -->
         <section class="impact-story" id="impact">
-            <h2>Real Impact: Meet Amina</h2>
+            <h2>Your Impact</h2>
             <div class="impact-content">
                 <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80" alt="A child in need being given water, charity: water" class="impact-image">
                 <p>
-                    Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
+                    Turn your passion for change into real, visible impact. With charity: water, every dollar you give funds clean water projects you can see, track, and share– empowering communities and driving global, sustainable change.
                 </p>
             </div>
         </section>
